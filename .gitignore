@@ -1,0 +1,13 @@
+build/
+data/
+firmware/build/
+firmware/third_party/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/.idea/
+*.iml

@@ -1,0 +1,22 @@
+VERSION "ev-test-copilot 1.0"
+
+NS_ :
+
+BS_:
+
+BU_: BMS VCU ACQ
+
+BO_ 981 BMS_Pack: 8 BMS
+ SG_ PackVoltage : 0|16@1+ (0.01,0) [0|655.35] "V" ACQ
+ SG_ PackCurrent : 16|16@1- (0.1,0) [-3276.8|3276.7] "A" ACQ
+ SG_ StateOfCharge : 32|16@1+ (0.01,0) [0|100] "%" ACQ
+ SG_ CellTempMax : 48|16@1- (0.1,0) [-40|125] "degC" ACQ
+
+BO_ 535 VCU_Speed: 4 VCU
+ SG_ VehicleSpeed : 0|16@1+ (0.01,0) [0|300] "km/h" ACQ
+ SG_ GearState : 16|8@1+ (1,0) [0|3] "" ACQ
+
+CM_ SG_ 981 PackCurrent "Positive in discharge (traction), negative in charge (regeneration)";
+CM_ BO_ 981 "Battery management system, sent every 100 ms";
+CM_ BO_ 535 "Vehicle control unit, sent every 20 ms";
+VAL_ 535 GearState 0 "P" 1 "R" 2 "N" 3 "D" ;

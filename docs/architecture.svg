@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 250" font-family="Helvetica, Arial, sans-serif" font-size="13">
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#455A64"/></marker></defs>
+  <rect width="900" height="250" fill="#ffffff"/>
+  <g fill="#F4F7FA" stroke="#90A4AE" stroke-width="1.4">
+    <rect x="20" y="60" width="170" height="120" rx="12"/>
+    <rect x="260" y="60" width="200" height="120" rx="12"/>
+    <rect x="540" y="40" width="340" height="160" rx="12"/>
+  </g>
+  <g font-weight="bold" fill="#263238">
+    <text x="105" y="88" text-anchor="middle">Véhicule</text>
+    <text x="360" y="88" text-anchor="middle">Boîtier d'acquisition</text>
+    <text x="710" y="68" text-anchor="middle">Application Android (Kotlin, Compose)</text>
+  </g>
+  <g fill="#455A64">
+    <text x="105" y="115" text-anchor="middle">BMS : U, I, SoC, T°</text>
+    <text x="105" y="135" text-anchor="middle">VCU : vitesse, rapport</text>
+    <text x="105" y="160" text-anchor="middle" font-size="11">bus CAN 500 kbit/s</text>
+    <text x="360" y="112" text-anchor="middle">STM32F446 (C, HAL)</text>
+    <text x="360" y="132" text-anchor="middle">décodage CAN, calcul P = U·I</text>
+    <text x="360" y="152" text-anchor="middle">énergie, trames + CRC16</text>
+    <text x="560" y="98">• Réassemblage des trames, contrôle CRC</text>
+    <text x="560" y="120">• Énergie traction / régénération, Wh/km</text>
+    <text x="560" y="142">• Autonomie, puissance sur 60 s</text>
+    <text x="560" y="164">• Assistant vocal : question → réponse orale</text>
+    <text x="560" y="186">• Repères d'événements pendant l'essai</text>
+  </g>
+  <g stroke="#455A64" stroke-width="2" marker-end="url(#a)">
+    <line x1="190" y1="120" x2="255" y2="120"/>
+    <line x1="460" y1="120" x2="535" y2="120"/>
+  </g>
+  <text x="222" y="112" text-anchor="middle" font-size="11" fill="#455A64">CAN</text>
+  <text x="498" y="112" text-anchor="middle" font-size="11" fill="#455A64">BLE</text>
+  <text x="498" y="138" text-anchor="middle" font-size="11" fill="#455A64">10 Hz</text>
+</svg>

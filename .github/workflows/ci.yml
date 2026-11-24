@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  core:
+    name: Cœur C et outils Python
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt ruff
+      - run: ruff check tools tests
+      - run: make test
+      - name: Les trames de démo de l'application sont à jour
+        run: |
+          make build/packets.bin
+          cmp build/packets.bin android/app/src/main/assets/demo_drive.bin
+
+  firmware:
+    name: Firmware STM32 (arm-none-eabi)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y gcc-arm-none-eabi libnewlib-arm-none-eabi
+      - run: make -C firmware deps all
+      - uses: actions/upload-artifact@v4
+        with:
+          name: firmware
+          path: |
+            firmware/build/evtc_box.bin
+            firmware/build/evtc_box.hex
+
+  android:
+    name: Application Android
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: android
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: gradle/actions/setup-gradle@v4
+      - run: chmod +x gradlew
+      - run: ./gradlew --no-daemon testDebugUnitTest assembleDebug
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rapports-tests-android
+          path: android/app/build/reports/tests/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ev-test-copilot-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
